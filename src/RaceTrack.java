@@ -20,8 +20,14 @@ public class RaceTrack {
             tracks[t] = (int)(trackMargin+(t+0.5)*trackWidth);
         }
 	}
-	
-	public void draw(SimpleWindow window) {
+
+    /**
+     * Ritar upp banorna
+     *
+     * Parametern SimpleWindow som stog i beskrivningen flyttades medvetet till konstruktorn istället för funktionerna
+     * getTrackWidth och getTrackWidthTotal på vilken den förstnämnda har ett beroende.
+     */
+	public void draw() {
         int lineWidth = 3;
         window.setLineWidth(lineWidth);
 		window.moveTo(window.getWidth()/2-12, yFinish-10);
@@ -46,22 +52,37 @@ public class RaceTrack {
         window.setLineWidth(lineWidth);
 	}
 
+    /**
+     * @return Positionen i X-led för samtliga banor
+     */
     public int[] getTracks() {
         return tracks;
     }
 
+    /**
+     * @return Bredden av samtliga banor
+     */
     public int getTrackWidthTotal() {
         return window.getWidth()-trackMargin*2;
     }
 
+    /**
+     * @return Bredderna av banorna
+     */
     public int getTrackWidth() {
         return getTrackWidthTotal()/nTracks;
     }
 
+    /**
+     * @return Startlinjens position i Y-led
+     */
 	public int getStartY() {
 		return yStart;
 	}
-	
+
+    /**
+     * @return Startlinjent position i X-led
+     */
 	public int getFinishY() {
 		return yFinish;
 	}

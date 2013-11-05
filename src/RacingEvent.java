@@ -35,7 +35,7 @@ public class RacingEvent {
 		boolean passedHalf = false;
         int trackWidth = track.getTrackWidth();
 
-        int delay = 1;
+        int delay = 10;
 		while (!anyPassed(finishY)) {
             for (int t=0; t<turtles.length; t++) {
                 if (turtles[t].getX() < turtles[t].getTrackX()-trackWidth/6) {
@@ -46,8 +46,8 @@ public class RacingEvent {
                     turtles[t].left(random.nextInt(5)-2);
                 }
                 turtles[t].forward(random.nextInt(2+1));
-                window.delay(delay);
             }
+            window.delay(delay);
 
 			if (!passedHalf && anyPassed((startY-finishY)/2 + finishY)) {
 				Vector<Integer> leaders = getLeaders();
