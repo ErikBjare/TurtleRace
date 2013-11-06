@@ -5,6 +5,11 @@ public class Console {
     int cursorX;
     int cursorY;
 
+    /**
+     * @param w Fönstret att rita på (instans av SimpleWindow)
+     * @param cursorX Var fönstret ska börja i X-led
+     * @param cursorY Var fönstret ska börja i Y-led
+     */
     public Console(SimpleWindow w, int cursorX, int cursorY) {
         this.window = w;
         this.cursorX = cursorX;

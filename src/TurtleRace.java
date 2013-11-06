@@ -5,7 +5,7 @@ import java.lang.Math;
 public class TurtleRace {
 
 	public static void main(String[] args) {
-		SimpleWindow window = new SimpleWindow(600, 650, "Turtlerace"); // Y: 650
+		SimpleWindow window = new SimpleWindow(600, 650, "Turtlerace");
 
         int n_turtles = 20;
 

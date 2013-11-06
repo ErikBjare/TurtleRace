@@ -9,8 +9,15 @@ public class RacingEvent {
 	private Turtle turtles[];
     private Console console;
     private SimpleWindow window;
-	
-	public RacingEvent(RaceTrack track, int n_turtles, Console console, SimpleWindow w) {
+
+    /**
+     * @param track En instans av RaceTrack att köra loppet på
+     * @param n_turtles Antalet sköldpaddor att skapa
+     * @param console Konsolen att skriva meddelanden till (instans av Console)
+     * @param w Fönstret att rita på (instans av SimpleWindow)
+     */
+	public RacingEvent(RaceTrack track, int n_turtles,
+                       Console console, SimpleWindow w) {
 		this.track = track;
         this.window = w;
         Turtle turtles[] = new Turtle[n_turtles];
@@ -43,38 +50,44 @@ public class RacingEvent {
 
         int delay = 10;
 		while (!anyPassed(finishY)) {
-            for (int t=0; t<turtles.length; t++) {
-                if (turtles[t].getX() <= turtles[t].getTrackX()-trackWidth/6) {
-                    turtles[t].left(-1);
-                } else if (turtles[t].getX() >= turtles[t].getTrackX()+trackWidth/6) {
-                    turtles[t].left(1);
+            for (Turtle t : turtles) {
+                if (t.getX() <= t.getTrackX()-trackWidth/6) {
+                    t.left(-1);
+                } else if (t.getX() >= t.getTrackX()+trackWidth/6) {
+                    t.left(1);
                 } else {
-                    turtles[t].left(random.nextInt(5)-2);
+                    t.left(random.nextInt(5)-2);
                 }
-                turtles[t].forward(random.nextInt(2+1));
+                t.forward(random.nextInt(2+1));
             }
-            window.delay(delay);
+            SimpleWindow.delay(delay);
 
 			if (!passedHalf && anyPassed((startY-finishY)/2 + finishY)) {
 				Vector<Integer> leaders = getLeaders();
+                String msg;
                 if (leaders.size() == 1) {
-                    console.print((leaders.get(0)+1) + " är först med att ha tagit sig halva sträckan!");
+                    msg = "Sköldpadda " +
+                            leaders.get(0) +
+                            " är först med att ha tagit sig halva sträckan!";
                 } else {
-                    console.print(leaders.toString() + " ligger lika och är först med att ha tagit sig halva sträckan!");
+                    msg = "Sköldpaddorna " +
+                            leaders.toString() +
+                            " ligger lika och är först med att ha tagit sig halva sträckan!";
                 }
-				window.delay(2000);
+                console.print(msg);
+				SimpleWindow.delay(2000);
 				passedHalf = true;
 			}
 		}
 
         Vector<Integer> leaders = getLeaders();
         for (Integer i : leaders) {
-            console.print("Sköldpadda " + (i+1) + " kom på förstaplats!");
+            console.print("Sköldpadda " + i + " kom på förstaplats!");
         }
 	}
 
     /**
-     * Returnerar en array med indexen för de/den ledande sköldpaddorna/sköldpaddan
+     * @return Vektor med (index+1) för de(n) ledande sköldpaddan/sköldpaddorna
      */
     public Vector<Integer> getLeaders() {
         Vector<Integer> leaders = new Vector<Integer>();
@@ -83,11 +96,11 @@ public class RacingEvent {
             int tY = turtles[t].getY();
             if (tY < leaderY) {
                 leaders.clear();
-                leaders.add(t);
+                leaders.add(t+1);
                 leaderY = tY;
             } else if (tY == leaderY) {
-                if (!leaders.contains(t)) {
-                    leaders.add(t);
+                if (!leaders.contains(t+1)) {
+                    leaders.add(t+1);
                 }
             }
         }

@@ -7,7 +7,13 @@ public class RaceTrack {
     private int nTracks;
     private int tracks[];
     private int trackMargin = 50;
-    
+
+    /**
+     * @param w Fönstret att rita på (instans av SimpleWindow)
+     * @param yStart Var startlinjen ligger i Y-led
+     * @param yFinish Var mållinjen ligger i Y-led
+     * @param n_tracks Hur många spår som ska skapas
+     */
     public RaceTrack(SimpleWindow w, int yStart, int yFinish, int n_tracks) {
         this.window = w;
         this.yStart = yStart;
