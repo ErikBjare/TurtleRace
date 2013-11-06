@@ -1,5 +1,5 @@
 # TurtleRace
-Just another homework assignment, written together with Carl Eriksson
+Just another homework assignment, written together with Carl Ericsson
 
 ### Usage
 Just do the `./run.sh` in the root dir of the repo!

@@ -1,0 +1,82 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}     % För svenska bokstäver
+\usepackage[utf8]{inputenc}  % Teckenkodning UTF8
+\usepackage[swedish]{babel}  % För svensk avstavning och svenska
+\usepackage{graphicx}        % rubriker (t ex "Innehållsförteckning")
+\usepackage{fancyvrb}        % För programlistor med tabulatorer
+\usepackage{verbatim}
+\usepackage{hyperref}
+\newcommand{\code}[1]{\texttt{#1}}
+
+\fvset{tabsize=4}            % Tabulatorpositioner
+\fvset{fontsize=\small}      % Lagom storlek för programlistor
+
+\title{TurtleRace}
+\author{Erik Bjäreholt, D13 (dat13ebj@student.lu.se)\\Carl Ericsson, D13 (dat13cer@student.lu.se)}
+\date{Inlämningsdatum: 6 november 2013}        % Blir dagens datum om det utelämnas
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\begin{document}             % Början på dokumentet
+
+\section{Bakgrund}
+
+Uppgiften är att skapa och genomföra ett race mellan sköldpaddor. Det ska finnas klasser för att beskriva sköldpaddor, banan och själva racet. Sköldpaddorna ska springa var sin bana mellan en start och mållinje i ett fönster. De tar sig framåt med slumpmässigt långa steg i intervallet [0,2]. Vi har även valt att skriva ut vem som leder när den ledande sköldpaddan tagit sig halvvägs.
+
+Fönstret loppet genomförs i ska vara av typen \code{SimpleWindow}, en färdigskriven klass som används i kursen och är alltså inte skriven av oss. Vad gäller klassen \code{Turtle} som beskriver sköldpaddorna är den skriven vid ett tidigare tillfälle men vi har valt att utöka den lite för att passa bättre för det här ändamålet.  
+
+Git-repository finnes här: \url{https://github.com/ErikBjare/TurtleRace}
+
+\section{Modell}
+
+Vi har byggt upp programmet så att objekt som delas mellan klasser skapas i main metoden varav objekt som endast används i enstaka klasser skapas i dessa klasser. \code{RaceTrack} och \code{Console} som ritar upp grundläggande utseende för programmet körs innan \code{RacingEvent} initialiseras.
+
+\begin{tabular}{lp{8cm}}
+    $Namn$ & $Beskrivning$\\
+      
+	\code{TurtleRace}  &  
+    Huvudklass för programmet med \code{main}-metoden, instansierar \code{Console}, \code{RaceTrack} och \code{RacingEvent}\\
+
+	\code{Console} & 
+	Beskriver och ritar upp en meddelandekonsol i \code{SimpleWindow}\\
+
+	\code{RaceTrack} &
+	Beskriver och ritar upp en bana i \code{SimpleWindow}\\	  
+	      
+	\code{RacingEvent} &
+	Genomför ett lopp med ett antal sköldpaddor som beskrivs av klassen \code{Turtle} och ritar upp förloppet över det \code{RaceTrack} som ritats upp på \code{SimpleWindow}, skriver även ut vem som leder halvvägs och vem som slutligen vinner loppet till \code{Console}.\\
+	
+	\code{Turtle} & 
+	Beskriver en sköldpadda och dess möjliga handlingar\\
+\end{tabular}\\
+
+
+\section{Brister och kommentarer}
+
+\subsection{Sköldpaddors vandring utanför banan}
+Sköldpaddorna rättar stegvis till sin riktning om de hamnar utanför sin bana och kan därmed, om riktningen sköldpaddan håller över banans kant är tillräckligt stor, leda till att sköldpaddan befinner sig utanför banan en mindre stund.
+
+\subsection{Färg-generatorn skapar begränsad uppsättning färger}
+Vår färggenerator skapar maximalt 10 olika färger, det hade varit enkelt att åtgärda men vi lade ingen tid på detta då det ansågs överflödigt.
+      
+\section{Programlistor}
+
+\subsection{TurtleRace}
+\VerbatimInput{src/TurtleRace.java}      
+
+\subsection{Console}
+\VerbatimInput{src/Console.java}
+
+\subsection{RacingEvent}
+\VerbatimInput{src/RacingEvent.java}      
+
+\subsection{RaceTrack}
+\VerbatimInput{src/RaceTrack.java}
+
+\subsection{Turtle}
+\VerbatimInput{src/Turtle.java}
+
+\end{document}               % Slut på dokumentet
